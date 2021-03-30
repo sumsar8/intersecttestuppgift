@@ -1,4 +1,3 @@
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -45,7 +44,10 @@ public class intersect extends Canvas implements Runnable{
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        bana.x = 1;
+        bana.y = 1;
+        bana.width = 1920;
+        bana.height = 1080;
         carX = 300;
         carY = 150;
         carVX = 0;
@@ -66,14 +68,15 @@ public class intersect extends Canvas implements Runnable{
         }
         Graphics g = bs.getDrawGraphics();
 
-        update();
+        //update();
         g.setColor(Color.WHITE);
         g.fillRect(0,0,width,height);
-        drawcar(g, carX,carY);
-        drawcar(g, carX,carY);
+
+        g.drawImage(banaimg,bana.x,bana.y,bana.width,bana.height,null);
         g.dispose();
         bs.show();
     }
+
 
 
     private void drawcar(Graphics g, int x, int y) {
@@ -82,10 +85,6 @@ public class intersect extends Canvas implements Runnable{
         g.setColor(new Color(0x444444));
         int[] xcoords = {x-5, x + 25, x + 55};
         int[] ycoords = {y-40, y - 65, y-40};
-        g = bs.getDrawGraphics();
-        g.drawImage(banaimg,bana.x,bana.y,bana.width,bana.height,null);
-        g.dispose();
-        bs.show();
     }
 
     public static void main(String[] args) {
