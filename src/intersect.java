@@ -7,6 +7,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+import static javax.imageio.ImageIO.read;
+
 /**
  * This is a class
  * Created 2021-03-19
@@ -24,10 +26,11 @@ public class intersect extends Canvas implements Runnable{
     private BufferStrategy bs;
 
     private int carX, carY, carVX, carVY;
-
+    private Rectangle bana;
+    private BufferedImage banaimg;
 
     public intersect() {
-        JFrame frame = new JFrame("A simple painting");
+        JFrame frame = new JFrame("Racegame");
         this.setSize(width,height);
         frame.add(this);
         frame.pack();
@@ -37,7 +40,11 @@ public class intersect extends Canvas implements Runnable{
 
         isRunning = false;
 
-
+        try {
+            banaimg = read(new File("bana.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         carX = 300;
         carY = 150;
@@ -75,6 +82,10 @@ public class intersect extends Canvas implements Runnable{
         g.setColor(new Color(0x444444));
         int[] xcoords = {x-5, x + 25, x + 55};
         int[] ycoords = {y-40, y - 65, y-40};
+        g = bs.getDrawGraphics();
+        g.drawImage(banaimg,bana.x,bana.y,bana.width,bana.height,null);
+        g.dispose();
+        bs.show();
     }
 
     public static void main(String[] args) {
